@@ -11,11 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::group(['middleware' => 'auth'], function () {
+	Route::get('/', 'FrontController@index');
 	Route::resource('bazar', 'BazarControlle');
 	Route::resource('meal', 'MealController');
 });
