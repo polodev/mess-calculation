@@ -13,7 +13,7 @@
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/', 'FrontController@index');
-	Route::resource('bazar', 'BazarControlle');
+	Route::resource('bazar', 'BazarController');
 	Route::resource('meal', 'MealController');
 });
 
