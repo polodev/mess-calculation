@@ -68,4 +68,21 @@ trait HelperFunctions {
 	
 	}
 
+	/**
+	 * generating formatted date from date, and day 
+	 * $date - carbon instance 
+	 * day of the month 
+	 */
+	
+	public static function formatted_date($date, $day) {
+		$month = $date->month;
+		$year = $date->year;
+		$return_date =  Carbon::createFromDate($year, $month, $day)
+											->toFormattedDateString();
+		return $return_date;
+	}
+
+
+
+
 }
