@@ -16,10 +16,10 @@
       <!-- Right Side Of Navbar -->
       <ul class='navbar-nav'>
       	<li class='nav-item'>
-      		<a href="#" class="nav-link">Bazar</a>
+      		<a href="{{ route('bazar.index') }}" class="nav-link">Bazar</a>
       	</li>
       	<li class='nav-item'>
-      		<a href="#" class="nav-link">Meal</a>
+      		<a href="{{ route('meal.index') }}" class="nav-link">Meal</a>
       	</li>
       	<li class='nav-item'>
       		<a href="#" class="nav-link">Timeline</a>
