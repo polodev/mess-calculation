@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('bazar', 'BazarControlle');
+	Route::resource('meal', 'MealController');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

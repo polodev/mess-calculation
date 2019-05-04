@@ -33,6 +33,18 @@ class User extends Authenticatable implements HasMedia
     $this->addMediaCollection('avatar')->singleFile();
   }
 
+  // relationship 
+  // 
+  public function bazars()
+  {
+    return $this->hasMany(Bazar::class);
+  }
+
+  public function meals()
+  {
+    return $this->hasMany(Meal::class);
+  }
+
 
   // mine function
 
