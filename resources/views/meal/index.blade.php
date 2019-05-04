@@ -5,7 +5,13 @@
 </div>
 <h1>All Meals: May 2019</h1>
 
-<table class="table table-bordered">
+<?php
+	$date = Carbon::now();
+	$month = $date->month;
+	$year = $date->year;
+	$no_of_days_in_month = $date->daysInMonth ;
+?>
+<table class="table table-bordered table-responsive">
 	<thead>
 		<tr>
 			<th>Day </th>
@@ -17,20 +23,12 @@
 	<tfoot>
 		<tr>
 			<th>Total: </th>
-			<th>25</th>
-			<th>29</th>
-			<th>20</th>
-			<th>22</th>
+			@foreach ($users as $user)
+				<th>{{ Helpers::get_meal_for_full_month($user->id, $date) }}</th>
+			@endforeach
 		</tr>
 	</tfoot>
 	<tbody>
-		<?php
-		$date = Carbon::now();
-		$month = $date->month;
-		$year = $date->year;
-		echo $year;
-		$no_of_days_in_month = $date->daysInMonth ;
-		?>
 		@foreach (range(1, $no_of_days_in_month) as $day)
 		<tr>
 			<td>{{ $day }}</td>

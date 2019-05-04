@@ -11,7 +11,7 @@ const users = [
   ],
   [
     'name' => 'Mohammad Arif',
-    'display_name' => '',
+    'display_name' => 'Arif',
     'email' => 'arif@gmail.com',
     'role_id' => 2,
   ],
