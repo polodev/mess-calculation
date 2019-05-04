@@ -8,11 +8,10 @@
 <table class="table table-bordered">
 	<thead>
 		<tr>
-			<th>Date</th>
-			<th>Shibu</th>
-			<th>Arif</th>
-			<th>tuhin</th>
-			<th>Rasel</th>
+			<th>Day </th>
+			@foreach ($users as $user)
+				<th>{{$user->display_name ? $user->display_name : $user->name }}</th>
+			@endforeach
 		</tr>
 	</thead>
 	<tfoot>
@@ -25,13 +24,20 @@
 		</tr>
 	</tfoot>
 	<tbody>
-		@foreach (range(1, 3) as $number)
+		<?php
+		$date = Carbon::now();
+		$month = $date->month;
+		$year = $date->year;
+		echo $year;
+		$no_of_days_in_month = $date->daysInMonth ;
+		?>
+		@foreach (range(1, $no_of_days_in_month) as $day)
 		<tr>
-			<td>May 1, 2019</td>
-			<td>2</td>
-			<td>1</td>
-			<td>2</td>
-			<td>1</td>
+			<td>{{ $day }}</td>
+			@foreach ($users as $user)
+				<td>{{ Helpers::get_meal($user->id, $date, $day) }}</td>
+			@endforeach
+
 		</tr>
 		@endforeach
 	</tbody>

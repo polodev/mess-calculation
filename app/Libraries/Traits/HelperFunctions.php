@@ -2,12 +2,18 @@
 
 namespace App\Libraries\Traits;
 
+use App\Meal;
 use Carbon\Carbon;
 
 
 
 trait HelperFunctions {
 	
+	/**
+	 * generate fake meal data 
+	 * for seeding data
+	 */
+
 	public static function meals()
 	{
 		$meals = [];
@@ -24,4 +30,22 @@ trait HelperFunctions {
 		}
 		return $meals;
 	}
+
+	/**
+	 * get a meal by carbon date and user_id
+	 */
+	public static function get_meal($user_id, $date, $day) 
+	{
+		$month = $date->month;
+		$year = $date->year;
+		$meal = Meal::whereYear('date', $year)
+							->whereMonth('date', $month)
+							->whereDay('date', $day)->first();
+		if ($meal) {
+			return $meal->number_of_meal;
+		}else {
+			return 0;
+		}
+	}
+
 }

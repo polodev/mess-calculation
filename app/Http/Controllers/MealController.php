@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Meal;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,10 @@ class MealController extends Controller
      */
     public function index()
     {
-      return view('meal.index');
+      $meals = Meal::all();
+      $users = User::all();
+      // return $meals;
+      return view('meal.index', compact( 'users' ) );
     }
 
     /**
