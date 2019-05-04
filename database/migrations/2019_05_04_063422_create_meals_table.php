@@ -17,7 +17,7 @@ class CreateMealsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->date('date');
-            $table->integer('no_of_meal');
+            $table->integer('number_of_meal');
             $table->timestamps();
         });
     }

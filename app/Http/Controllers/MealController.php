@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class MealController extends Controller
@@ -13,7 +14,7 @@ class MealController extends Controller
      */
     public function index()
     {
-        return view('meal.index');
+      return view('meal.index');
     }
 
     /**
@@ -23,7 +24,9 @@ class MealController extends Controller
      */
     public function create()
     {
-        //
+
+      $users = User::all();
+      return view('meal.create', compact('users'));
     }
 
     /**
@@ -81,4 +84,4 @@ class MealController extends Controller
     {
         //
     }
-}
+  }
