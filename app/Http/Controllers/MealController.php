@@ -41,7 +41,12 @@ class MealController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'date'    => 'required',
+            'number_of_meal'  => 'required',
+        ]);
+        return $request->all();
     }
 
     /**
