@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
-<h2 class="my-2">Add a bazar</h2>
+<h2 class="my-2">Edit a bazar</h2>
 @include('partials.errors')
 @include('partials.alert')
-<form action='{{ route('bazar.store') }}' method="post">
+<form action='{{ route('bazar.update', ['bazar' => $bazar->id]) }}' method="post">
 
 	@csrf
+	@method('PUT')
 	<div class='form-group'>
 		<label for="date">Date</label>
 		<input placeholder="Bazar Date" type="text" name="date" class="form-control" id="date">
@@ -38,7 +39,7 @@
 		<select class="form-control" name="type" id="type">
 			@foreach ($types as $type)
 				<option
-					{{old('type') == $type ? 'selected' : ''}}
+					{{old('type', $bazar->type) == $type ? 'selected' : ''}}
 					value="{{ $type }}">{{ ucfirst( $type ) }}</option>
 			@endforeach
 		</select>
@@ -46,12 +47,12 @@
 
 	<div class='form-group'>
 		<label for="cost">Bazar Cost</label>
-		<input value="{{ old('cost') }}" type='number' name='cost' id='cost' class="form-control" />
+		<input value="{{ old('cost', $bazar->cost) }}" type='number' name='cost' id='cost' class="form-control" />
 	</div>
 
 	<div class='form-group'>
 		<label for="more_info">More Information of Bazar (optional)</label>
-		<textarea name="more_info" class="form-control" id="more_info">{{ old('more_info') }}</textarea>
+		<textarea name="more_info" class="form-control" id="more_info">{{ old('more_info', $bazar->more_info) }}</textarea>
 	</div>
 
 	<div class='form-group'>
@@ -59,6 +60,12 @@
 	</div>
 	
 </form>
+
+<?php
+
+$db_date = $bazar->date->isoFormat('d-m-Y');
+
+?>
 @endsection
 
 @push('script')
@@ -66,8 +73,8 @@
 $("#date").flatpickr({
   dateFormat: "d-m-Y",
   maxDate: 'today',
- <?php if (old('date')): ?>
-  defaultDate: '{{ old('date') }}'
+ <?php if (old('date', $db_date)): ?>
+  defaultDate: '{{ old('date', $db_date) }}'
 <?php endif; ?>
 });
 </script>

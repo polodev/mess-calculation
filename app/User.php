@@ -124,6 +124,7 @@ class User extends Authenticatable implements HasMedia
 
   public function is_editable($user_id)
   {
+    return $this->id == $user_id;
     return $this->isAdmin() || $this->id == $user_id;
   }
   

@@ -66,7 +66,7 @@
 					</td>
 					<td>
 						<a class="btn btn-secondary" href="{{ route('bazar.edit', ['bazar' => $bazar->id]) }}">Edit</a>
-						<form method="post" class="d-inline" action="{{ route('bazar.destroy', ['bazar' => $bazar->id]) }}">
+						<form onsubmit="return confirm('Are you sure you want to delete this entry?')" method="post" class="d-inline" action="{{ route('bazar.destroy', ['bazar' => $bazar->id]) }}">
 							@csrf
 							@method('DELETE')
 							<button class="btn btn-danger" type="submit">DELETE</button>

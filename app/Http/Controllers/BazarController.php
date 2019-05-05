@@ -42,15 +42,22 @@ class BazarController extends Controller
     {
       $this->validate($request, [
         'date'    => 'required',
-        'user_id' => 'required',
         'type'    => 'required',
         'cost'    => 'required'
       ]);
+
+      $user_id        = request('user_id');
+      $auth_user = auth()->user();
+      if ($auth_user->isAdmin() || !$user_id) {
+        $user_id = $auth_user->id;
+      }
+
       Bazar::create([
-        'date'    => Carbon::parse(request('date')),
-        'user_id' => request('user_id'),
-        'type'    => request('type'),
-        'cost'    => request('cost'),
+        'date'      => Carbon::parse(request('date')),
+        'user_id'   => $user_id,
+        'type'      => request('type'),
+        'cost'      => request('cost'),
+        'more_info' => request('more_info'),
       ]);
       return back()->withMessage('Bazar Added Successfully');
     }
@@ -74,7 +81,9 @@ class BazarController extends Controller
      */
     public function edit($id)
     {
-        //
+      $users = User::all();
+      $bazar = Bazar::findOrFail($id);
+      return view('bazar.edit', compact('users', 'bazar') );
     }
 
     /**
@@ -86,7 +95,26 @@ class BazarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+        'date'    => 'required',
+        'type'    => 'required',
+        'cost'    => 'required'
+      ]);
+
+      $user_id        = request('user_id');
+      $auth_user = auth()->user();
+      if ($auth_user->isAdmin() || !$user_id) {
+        $user_id = $auth_user->id;
+      }
+      $bazar            = Bazar::findOrFail($id);
+      $bazar->date      = Carbon::parse(request('date'));
+      $bazar->user_id   = $user_id;
+      $bazar->type      = request('type');
+      $bazar->cost      = request('cost');
+      $bazar->more_info = request('more_info');
+      $bazar->save();
+
+      return back()->withMessage('Bazar Updated Successfully');
     }
 
     /**

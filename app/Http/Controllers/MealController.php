@@ -87,11 +87,16 @@ class MealController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'user_id' => 'required',
             'date'    => 'required',
             'number_of_meal'  => 'required',
         ]);
+
         $user_id        = request('user_id');
+        $auth_user = auth()->user();
+        if ($auth_user->isAdmin() || !$user_id) {
+          $user_id = $auth_user->id;
+        }
+
         $date           = request('date');
         $number_of_meal = request('number_of_meal');
         $date           = Carbon::parse($date);
