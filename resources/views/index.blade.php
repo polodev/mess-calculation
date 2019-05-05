@@ -8,6 +8,8 @@
 
 @include('partials.alert')
 
+<h1 class="my-4">Calculation : {{ $year_month->monthName }}, {{ $year }}</h1>
+
 <div class='card my-3'>
 	<div class='card-header'>
 		<h1>Timeline</h1>
