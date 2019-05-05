@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Bazar;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BazarController extends Controller
@@ -13,7 +16,10 @@ class BazarController extends Controller
      */
     public function index()
     {
-        //
+      $year_month = Carbon::now();
+      $bazars = Bazar::paginate( 30 );
+      return view( 'bazar.index', compact( 'bazars', 'year_month') );
+
     }
 
     /**
@@ -23,8 +29,8 @@ class BazarController extends Controller
      */
     public function create()
     {
-        //
-    }
+      $users = User::all();
+      return view('bazar.create', compact('users'));    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +40,19 @@ class BazarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request, [
+        'date'    => 'required',
+        'user_id' => 'required',
+        'type'    => 'required',
+        'cost'    => 'required'
+      ]);
+      Bazar::create([
+        'date'    => Carbon::parse(request('date')),
+        'user_id' => request('user_id'),
+        'type'    => request('type'),
+        'cost'    => request('cost'),
+      ]);
+      return back()->withMessage('Bazar Added Successfully');
     }
 
     /**
@@ -81,4 +99,4 @@ class BazarController extends Controller
     {
         //
     }
-}
+  }

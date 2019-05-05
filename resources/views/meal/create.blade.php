@@ -7,7 +7,7 @@
 
 	@csrf
 	<div class='form-group'>
-		<label for="date">Date</label>
+		<label for="date">Date of Bazar</label>
 		<input type="text" name="date" class="form-control" id="date">
 	</div>
 	<!-- /.form-group -->

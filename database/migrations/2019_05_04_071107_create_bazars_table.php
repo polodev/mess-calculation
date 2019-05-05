@@ -19,6 +19,7 @@ class CreateBazarsTable extends Migration
             $table->integer('cost');
             $table->string('type')->default('regular'); // ['regular', 'common']
             $table->date('date');
+            $table->text('more_info')->nullable();
             $table->timestamps();
         });
     }
