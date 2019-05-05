@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bazar;
+use App\Debitcredit;
 use App\Meal;
 use App\User;
 use Carbon\Carbon;
@@ -13,7 +14,7 @@ class FrontController extends Controller
 
 	public function index() 
 	{
-		$year_month = Carbon::now();
+		 $year_month = Carbon::now();
       if (request('timeline')) {
         $timeline = Carbon::parse(request('timeline'));
         $timeline = $timeline->add(5, 'day');
@@ -31,9 +32,10 @@ class FrontController extends Controller
                         ->sum('cost');
       $total_meal           = Meal::FilterYearMonth($year_month)->sum('number_of_meal');
       $users                = User::where('enable', 1)->get();
-      $per_meal_cost        = $regular_bazars_cost ?  number_format( $regular_bazars_cost / $total_meal, 2) : 0;
-      $common_cost_per_user = $common_bazars_cost ? number_format( $common_bazars_cost / count( $users ), 2): 0;
-      $others_cost_per_user = $others_bazars_cost ? number_format( $others_bazars_cost / count( $users ), 2): 0;
+      $per_meal_cost        = $regular_bazars_cost ? $regular_bazars_cost / $total_meal : 0;
+      $per_meal_cost        = number_format( $per_meal_cost, 2 );
+      $common_cost_per_user = $common_bazars_cost ? round( $common_bazars_cost / count( $users ) ): 0;
+      $others_cost_per_user = $others_bazars_cost ? round( $others_bazars_cost / count( $users ) ): 0;
 
      	$costs = [];
      	foreach ($users as $user) {
@@ -41,13 +43,18 @@ class FrontController extends Controller
 	      $user_number_of_meal = Meal::FilterYearMonth($year_month)
 	      												->where('user_id', $user->id)
 	      												->sum('number_of_meal');
-	      $user_meal_cost  = $user_number_of_meal * $per_meal_cost;
+	      $user_meal_cost  = ceil( $user_number_of_meal * $per_meal_cost );
 	      $user_total_cost = $user_meal_cost + $common_cost_per_user + $others_cost_per_user;
 	      $user_bazar      = Bazar::FilterYearMonth($year_month)
 	      									 ->where('user_id', $user->id)
                            ->sum('cost');
-        $user_get_or_due = $user_bazar - $user_total_cost;
+        $debits =  Debitcredit::where('debit_to', $user->id)->FilterYearMonth($year_month)->sum('amount');
+        $credits =  Debitcredit::where('credit_to', $user->id)->FilterYearMonth($year_month)->sum('amount');
+        $balance = $credits - $debits;
+
+        $user_get_or_due = $user_bazar + $balance - $user_total_cost;
 	      $user_data['user'] = $user;
+        $user_data['balance'] = $balance;
 	      $user_data['bazar'] = $user_bazar;
 	      $user_data['number_of_meal']  = $user_number_of_meal;
 	      $user_data['meal_cost'] = $user_meal_cost;

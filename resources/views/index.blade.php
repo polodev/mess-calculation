@@ -95,7 +95,9 @@
 				<th>Meal cost</th>
 				<th>Common cost</th>
 				<th>Others cost</th>
-				<th>Total</th>
+				<th>Total Cost</th>
+				<th>user bazar</th>
+				<th>user balance</th>
 				<th>Get/Due</th>
 			</thead>
 			@foreach ($costs as $cost)
@@ -117,6 +119,12 @@
 					</td>
 					<td>
 						{{ $cost['total_cost'] }}
+					</td>
+					<td>
+						{{ $cost['bazar'] }}
+					</td>
+					<td>
+						{{ $cost['balance'] }}
 					</td>
 					<td>
 						{{ $cost['get_or_due'] }}
