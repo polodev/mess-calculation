@@ -13,5 +13,6 @@ class Helpers {
   use HelperFunctions;
   const users = users;
   const roles = roles;
+  const types = ['regular', 'common', 'others',];
 
 }

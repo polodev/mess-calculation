@@ -41,7 +41,7 @@
 
 
 <div class='table-responsive'>
-	<table class="table table-bordered">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Date </th>
@@ -64,15 +64,21 @@
 						{{ $bazar->type }}
 					</td>
 					<td>
-						{{ $bazar->cost }}
+						<a href="{{ route('bazar.show', ['bazar' => $bazar->id]) }}">
+							{{ $bazar->cost }}
+						</a>
 					</td>
 					<td>
-						<a class="btn btn-secondary" href="{{ route('bazar.edit', ['bazar' => $bazar->id]) }}">Edit</a>
-						<form onsubmit="return confirm('Are you sure you want to delete this entry?')" method="post" class="d-inline" action="{{ route('bazar.destroy', ['bazar' => $bazar->id]) }}">
-							@csrf
-							@method('DELETE')
-							<button class="btn btn-danger" type="submit">DELETE</button>
-						</form>
+						@if(auth()->user()->is_editable($bazar->user_id))
+							<a class="btn btn-secondary btn-sm" href="{{ route('bazar.edit', ['bazar' => $bazar->id]) }}">Edit</a>
+							<form onsubmit="return confirm('Are you sure you want to delete this entry?')" method="post" class="d-inline" action="{{ route('bazar.destroy', ['bazar' => $bazar->id]) }}">
+								@csrf
+								@method('DELETE')
+								<button class="btn btn-danger btn-sm" type="submit">DELETE</button>
+							</form>
+						@else 
+							Not applicable
+						@endif
 					</td>
 				</tr>
 			@endforeach

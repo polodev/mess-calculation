@@ -5,9 +5,11 @@
 	$year = $year_month->year;
 	$no_of_days_in_month = $year_month->daysInMonth ;
 ?>
-<div class="my-2">
-	<a class="btn btn-info" href="{{ route('meal.create') }}">Add Meal</a>
-</div>
+@if(false)
+	<div class="my-2">
+		<a class="btn btn-info" href="{{ route('meal.create') }}">Add Meal</a>
+	</div>
+@endif
 <h1 class="my-3">All Meals: {{ $year_month->monthName }}, {{ $year }}</h1>
 
 <div class='card my-3'>
@@ -40,7 +42,7 @@
 
 
 <div class='table-responsive'>
-	<table class="table table-bordered">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Day </th>
@@ -68,7 +70,10 @@
 
 			@foreach (range(1, $no_of_days_in_month) as $day)
 			<tr>
-				<td> <strong> {{ Helpers::formatted_date($year_month, $day) }} </strong> </td>
+				<td> 
+					 {{ Helpers::formatted_date($year_month, $day) }} 
+					 ({{ Helpers::formatted_date_day($year_month, $day) }})
+				</td>
 				@foreach ($users as $user)
 					<td 
 						class="editable" 

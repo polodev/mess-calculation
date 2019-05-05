@@ -26,18 +26,13 @@
 	@endif
 	<?php
 
-	$types = [
-		'regular',
-		'common',
-		'others',
-	];
 
 
 	 ?>
 	<div class='form-group'>
 		<label for="type">Type of cost</label>
 		<select class="form-control" name="type" id="type">
-			@foreach ($types as $type)
+			@foreach (Helpers::types as $type)
 				<option
 					{{old('type', $bazar->type) == $type ? 'selected' : ''}}
 					value="{{ $type }}">{{ ucfirst( $type ) }}</option>

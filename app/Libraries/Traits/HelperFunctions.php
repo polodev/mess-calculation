@@ -2,6 +2,7 @@
 
 namespace App\Libraries\Traits;
 
+use App\Libraries\Helpers;
 use App\Meal;
 use Carbon\Carbon;
 
@@ -29,6 +30,38 @@ trait HelperFunctions {
 			}
 		}
 		return $meals;
+	}
+
+	/**
+	 * generate fake bazar data 
+	 * for seeding data
+	 */
+
+	public static function bazars()
+	{
+// 		user_id
+// cost
+// type
+// date
+// more_info
+
+		$bazars = [];
+		foreach (range(0, 12) as $day) {
+			$mutable = Carbon::now()->sub($day, 'day');
+
+			foreach (range(1, 4) as $user_id) {
+				$bazars[] = [
+					'user_id' => $user_id,
+					'date' => $mutable->toDateString(),
+					'type' => Helpers::types[array_rand(Helpers::types)],
+					'more_info' => 'just some bazars',
+					'cost' => rand(200, 1000),
+				];
+			}
+		}
+		return $bazars;
+
+
 	}
 
 	/**
@@ -79,6 +112,13 @@ trait HelperFunctions {
 		$year = $year_month->year;
 		$return_date =  Carbon::createFromDate($year, $month, $day)
 											->toFormattedDateString();
+		return $return_date;
+	}
+	public static function formatted_date_day($year_month, $day) {
+		$month = $year_month->month;
+		$year = $year_month->year;
+		$return_date =  Carbon::createFromDate($year, $month, $day)
+											->englishDayOfWeek;
 		return $return_date;
 	}
 

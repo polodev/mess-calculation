@@ -22,9 +22,7 @@ class BazarController extends Controller
         $timeline = $timeline->add(5, 'day');
         $year_month = $timeline;
       }
-      $year = $year_month->year;
-      $month = $year_month->month;
-      $bazars = Bazar::whereYear('date', $year)->whereMonth('date', $month)->paginate( 30 );
+      $bazars = Bazar::FilterYearMonth($year_month)->get();
       return view( 'bazar.index', compact( 'bazars', 'year_month') );
 
     }
@@ -77,7 +75,8 @@ class BazarController extends Controller
      */
     public function show($id)
     {
-        //
+      $bazar = Bazar::findOrFail($id);
+      return view('bazar.show', compact('bazar'));
     }
 
     /**
@@ -134,6 +133,6 @@ class BazarController extends Controller
     {
       $bazar = Bazar::findOrFail($id);
       $bazar->delete();
-      return back()->withMessage('Bazar Deleted Successfully');
+      return redirect()->route('bazar.index')->withMessage('Bazar Deleted Successfully');
     }
   }

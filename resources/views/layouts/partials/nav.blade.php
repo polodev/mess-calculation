@@ -21,9 +21,6 @@
       	<li class='nav-item'>
       		<a href="{{ route('meal.index') }}" class="nav-link">Meal</a>
       	</li>
-      	<li class='nav-item'>
-      		<a href="#" class="nav-link">Timeline</a>
-      	</li>
 
       	<!-- /.nav-item -->
       </ul>
