@@ -94,13 +94,8 @@
 </div>
 @endsection
 
-@push('style')
-	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/air-datepicker/datepicker.min.css') }}">
-@endpush
 
 @push('script')
-	<script src="{{ asset('vendor/air-datepicker/datepicker.min.js') }}"></script>
-	<script src="{{ asset('vendor/air-datepicker/datepicker.en.js') }}"></script>
 
 <script>
 

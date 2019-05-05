@@ -13,4 +13,10 @@ class Meal extends Model
 	{
 		return $this->belongsTo(User::class);
 	}
+  public function scopeFilterYearMonth($query, $year_month)
+  {
+  	 $year = $year_month->year;
+     $month = $year_month->month;
+     $query->whereYear('date', $year)->whereMonth('date', $month);
+  }
 }
