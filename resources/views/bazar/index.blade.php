@@ -38,6 +38,37 @@
 </div>
 <!-- /.card -->
 
+<div class='row'>
+	<div class='col-md-5'>
+		<div class='card'>
+			<div class='card-header'>
+				<h2>At a Glance</h2>
+			</div>
+			<!-- /.card-header -->
+			<div class='card-body'>
+				<table class='table table-bordered'>
+					<tr>
+						<th>Regular Bazar Cost</th>
+						<td>Tk. {{ $regular_bazars_cost }}</td>
+					</tr>
+					<tr>
+						<th>Common Bazar Cost</th>
+						<td>Tk. {{ $common_bazars_cost }}</td>
+					</tr>
+					<tr>
+						<th>Others Bazar Cost</th>
+						<td>Tk. {{ $others_bazars_cost }}</td>
+					</tr>
+				</table>
+				<!-- /.table-bordered -->
+			</div>
+			<!-- /.card-body -->
+		</div>
+	</div>
+	<!-- /.col-md-5 -->
+</div>
+<!-- /.row -->
+<!-- /.card -->
 
 
 <div class='table-responsive'>
@@ -65,7 +96,7 @@
 					</td>
 					<td>
 						<a href="{{ route('bazar.show', ['bazar' => $bazar->id]) }}">
-							{{ $bazar->cost }}
+							Tk. {{ $bazar->cost }}
 						</a>
 					</td>
 					<td>

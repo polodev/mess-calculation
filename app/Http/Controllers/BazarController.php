@@ -22,8 +22,26 @@ class BazarController extends Controller
         $timeline = $timeline->add(5, 'day');
         $year_month = $timeline;
       }
+
+      $regular_bazars_cost = Bazar::FilterYearMonth($year_month)
+                       ->where('type', 'regular')
+                        ->sum('cost');
+      $common_bazars_cost = Bazar::FilterYearMonth($year_month)
+                       ->where('type', 'common')
+                        ->sum('cost');
+      $others_bazars_cost = Bazar::FilterYearMonth($year_month)
+                       ->where('type', 'others')
+                        ->sum('cost');
+
       $bazars = Bazar::FilterYearMonth($year_month)->get();
-      return view( 'bazar.index', compact( 'bazars', 'year_month') );
+      $data = compact(
+        'bazars',
+        'year_month',
+        'regular_bazars_cost',
+        'common_bazars_cost',
+        'others_bazars_cost',
+      );
+      return view( 'bazar.index', $data);
 
     }
 

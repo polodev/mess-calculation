@@ -3,6 +3,18 @@
 <h2 class="my-2">Add a bazar</h2>
 @include('partials.errors')
 @include('partials.alert')
+<div class='alert alert-info'>
+	<p>
+		Regular bazar: Self explanatory
+	</p>
+	<p>
+		Others bazar: all <strong>fixed</strong> cost which will be divide by mess member. eg. Net bill, electricity, gas bill, bari vhara, khala bill, garbage bill
+	</p>
+	<p>
+		Common bazar: all <strong>variable</strong> cost which will be divide by mess member. eg. purchasing a "Jaru", "vim" for mess. It will be very few.
+	</p>
+</div>
+<!-- /.alert alert-info -->
 <form action='{{ route('bazar.store') }}' method="post">
 
 	@csrf
