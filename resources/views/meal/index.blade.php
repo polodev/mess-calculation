@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('content')
 <?php
-	$month = $date->month;
-	$year = $date->year;
-	$no_of_days_in_month = $date->daysInMonth ;
+	$month = $year_month->month;
+	$year = $year_month->year;
+	$no_of_days_in_month = $year_month->daysInMonth ;
 ?>
 <div class="my-2">
 	<a class="btn btn-info" href="{{ route('meal.create') }}">Add Meal</a>
 </div>
-<h1 class="my-3">All Meals: {{ $date->monthName }}, {{ $year }}</h1>
+<h1 class="my-3">All Meals: {{ $year_month->monthName }}, {{ $year }}</h1>
 
 <div class='card my-3'>
 	<div class='card-header'>
@@ -49,19 +49,35 @@
 							<th>{{$user->display_name ? $user->display_name : $user->name }}</th>
 						@endforeach
 					</tr>
-				</thead>
-				<tbody>
+					{{-- just keep it top as well --}}
 					<tr>
 						<th>Total: </th>
 						@foreach ($users as $user)
-							<th>{{ Helpers::get_meal_for_full_month($user->id, $date) }}</th>
+							<th>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
 						@endforeach
 					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Total: </th>
+						@foreach ($users as $user)
+							<th>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
+						@endforeach
+					</tr>
+				</tfoot>
+				<tbody>
+
 					@foreach (range(1, $no_of_days_in_month) as $day)
 					<tr>
-						<td> <strong> {{ Helpers::formatted_date($date, $day) }} </strong> </td>
+						<td> <strong> {{ Helpers::formatted_date($year_month, $day) }} </strong> </td>
 						@foreach ($users as $user)
-							<td>{{ Helpers::get_meal($user->id, $date, $day) }}</td>
+							<td 
+								class="editable" 
+								contenteditable="true" 
+								data-year_month="{{ $year_month }}"
+								data-user_id="{{ $user->id }}"
+								data-day="{{ $day }}"
+							 >{{ Helpers::get_meal($user->id, $year_month, $day) }}</td>
 						@endforeach
 
 					</tr>
@@ -82,4 +98,28 @@
 @push('script')
 	<script src="{{ asset('vendor/air-datepicker/datepicker.min.js') }}"></script>
 	<script src="{{ asset('vendor/air-datepicker/datepicker.en.js') }}"></script>
+
+<script>
+
+function meal_inline_update(el) {
+	var $el = $(el);
+	var data = {
+		 number_of_meal : $el.text(),
+		 year_month     : $el.data('year_month'),
+		 day            : $el.data('day'),
+		 user_id        : $el.data('user_id'),
+	 };
+	 axios.post( "{{ route('meal.inline_update') }}", data)
+	 			.then(function (response) {
+	 				console.log('response', response);
+				 });
+}
+
+ $(document).on('blur', '.editable', function(){
+ 	meal_inline_update(this);
+ })
+
+
+	// console.log('axios', axios);
+</script>
 @endpush

@@ -16,14 +16,14 @@ class MealController extends Controller
      */
     public function index()
     {
-      $date = Carbon::now();
+      $year_month = Carbon::now();
       if (request('timeline')) {
         $timeline = Carbon::parse(request('timeline'));
         $timeline = $timeline->add(5, 'day');
-        $date = $timeline;
+        $year_month = $timeline;
       }
       $users = User::all();
-      return view('meal.index', compact( 'users', 'date' ) );
+      return view('meal.index', compact( 'users', 'year_month' ) );
     }
 
     /**
@@ -36,6 +36,46 @@ class MealController extends Controller
 
       $users = User::all();
       return view('meal.create', compact('users'));
+    }
+
+    protected function create_or_update_meal($user_id, $date, $number_of_meal)
+    {
+
+      $meal = Meal::whereDate('date', $date)
+                  ->where('user_id', $user_id)
+                  ->first();
+      if ($meal) {
+        $meal->number_of_meal = $number_of_meal;
+        $meal->save();
+        return 'Updated';
+      }  else {
+        Meal::create([
+          'user_id'        => $user_id,
+          'number_of_meal' => $number_of_meal,
+          'date'           => $date,
+        ]);
+        return 'Added';
+      }
+    }
+
+    public function inline_update(Request $request)
+    {
+
+      // from ajax data
+      $user_id        = request('user_id');
+      $number_of_meal = request('number_of_meal');
+      $year_month     = Carbon::parse( request('year_month'));
+      $day            = request('day');
+
+      // generating date 
+      $month = $year_month->month;
+      $year = $year_month->year;
+      $date =  Carbon::createFromDate($year, $month, $day);
+
+      $status = $this->create_or_update_meal($user_id, $date, $number_of_meal);
+
+      return response($status, 200);
+
     }
 
     /**
@@ -55,22 +95,9 @@ class MealController extends Controller
         $date           = request('date');
         $number_of_meal = request('number_of_meal');
         $date           = Carbon::parse($date);
-        // return $date;
-        // $date = Carbon::parse( '07-05-2019');
-        $meal = Meal::whereDate('date', $date)
-                  ->where('user_id', $user_id)
-                  ->first();
-        if ($meal) {
-          $meal->number_of_meal = $number_of_meal;
-          $meal->save();
-          return back()->withMessage('Meal Updated Successfully');
-        }
-        Meal::create([
-          'user_id'        => $user_id,
-          'number_of_meal' => $number_of_meal,
-          'date'           => $date,
-        ]);
-        return back()->withMessage('Meal Added successfully');
+
+        $status = $this->create_or_update_meal($user_id, $date, $number_of_meal);
+        return back()->withMessage("Meal $status Successfully");
     }
 
     /**

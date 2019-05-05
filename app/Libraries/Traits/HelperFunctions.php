@@ -34,10 +34,10 @@ trait HelperFunctions {
 	/**
 	 * get a single date meal by carbon date and user_id
 	 */
-	public static function get_meal($user_id, $date, $day) 
+	public static function get_meal($user_id, $year_month, $day) 
 	{
-		$month = $date->month;
-		$year = $date->year;
+		$month = $year_month->month;
+		$year = $year_month->year;
 		$meal = Meal::where('user_id', $user_id)
 							->whereYear('date', $year)
 							->whereMonth('date', $month)
@@ -52,10 +52,10 @@ trait HelperFunctions {
 	/**
 	 * get meals by carbon date and user_id
 	 */
-	public static function get_meal_for_full_month($user_id, $date) 
+	public static function get_meal_for_full_month($user_id, $year_month) 
 	{
-		$month = $date->month;
-		$year = $date->year;
+		$month = $year_month->month;
+		$year = $year_month->year;
 		$meal = Meal::where('user_id', $user_id)
 							->whereYear('date', $year)
 							->whereMonth('date', $month)
@@ -70,13 +70,13 @@ trait HelperFunctions {
 
 	/**
 	 * generating formatted date from date, and day 
-	 * $date - carbon instance 
+	 * $year_month - carbon instance 
 	 * day of the month 
 	 */
 	
-	public static function formatted_date($date, $day) {
-		$month = $date->month;
-		$year = $date->year;
+	public static function formatted_date($year_month, $day) {
+		$month = $year_month->month;
+		$year = $year_month->year;
 		$return_date =  Carbon::createFromDate($year, $month, $day)
 											->toFormattedDateString();
 		return $return_date;
