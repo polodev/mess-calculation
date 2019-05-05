@@ -42,7 +42,7 @@
 
 
 <div class='table-responsive'>
-	<table class="table table-striped">
+	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
 				<th>Day </th>

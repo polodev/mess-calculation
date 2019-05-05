@@ -5,14 +5,14 @@
 	$year = $year_month->year;
 	$no_of_days_in_month = $year_month->daysInMonth ;
 ?>
-<div class="my-2">
+<div class="mt-2">
 	<a class="btn btn-info" href="{{ route('bazar.create') }}">Add Bazar</a>
 </div>
-<h1 class="my-3">All Bazar: {{ $year_month->monthName }}, {{ $year }}</h1>
+<h1 class="my-2">All Bazar: {{ $year_month->monthName }}, {{ $year }}</h1>
 
 @include('partials.alert')
 
-<div class='card my-3'>
+<div class='card my-5'>
 	<div class='card-header'>
 		<h1>Timeline</h1>
 		<form action='{{ route('bazar.index') }}'>
@@ -38,7 +38,7 @@
 </div>
 <!-- /.card -->
 
-<div class='row'>
+<div class='row my-5'>
 	<div class='col-md-5'>
 		<div class='card'>
 			<div class='card-header'>
@@ -46,7 +46,7 @@
 			</div>
 			<!-- /.card-header -->
 			<div class='card-body'>
-				<table class='table table-bordered'>
+				<table class='table table-striped table-bordered'>
 					<tr>
 						<th>Regular Bazar Cost</th>
 						<td>Tk. {{ $regular_bazars_cost }}</td>
@@ -72,7 +72,7 @@
 
 
 <div class='table-responsive'>
-	<table class="table table-striped">
+	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
 				<th>Date </th>

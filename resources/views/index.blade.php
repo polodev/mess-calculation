@@ -8,9 +8,9 @@
 
 @include('partials.alert')
 
-<h1 class="my-4">Calculation : {{ $year_month->monthName }}, {{ $year }}</h1>
+<h1 class="my-5">Calculation : {{ $year_month->monthName }}, {{ $year }}</h1>
 
-<div class='card my-3'>
+<div class='card my-5'>
 	<div class='card-header'>
 		<h1>Timeline</h1>
 		<form action='{{ route('front.index') }}'>
@@ -43,7 +43,7 @@
 				<h2>At a Glance</h2>
 			</div>
 			<div class='card-body'>
-				<table class='table table-bordered'>
+				<table class='table table-striped table-bordered'>
 					<tr>
 						<th>Regular bazar cost</th>
 						<td>Tk. {{ $regular_bazars_cost }}</td>
@@ -82,13 +82,13 @@
 	</div>
 </div>
 
-<div class='card'>
+<div class='card my-5'>
 	<div class='card-header'>
-		Costs by user
+		<h2> Costs by user </h2>
 	</div>
 	<!-- /.card-header -->
 	<div class='card-body'>
-		<table class='table table-striped'>
+		<table class='table table-striped table-bordered'>
 			<thead>
 				<th>User</th>
 				<th>No of meal</th>
