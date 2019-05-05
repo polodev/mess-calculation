@@ -65,6 +65,10 @@
 						<td>{{ count($users) }} person</td>
 					</tr>
 					<tr>
+						<th>Per meal cost</th>
+						<td>Tk. {{ $per_meal_cost }}</td>
+					</tr>
+					<tr>
 						<th>Common cost per user</th>
 						<td>Tk. {{ $common_cost_per_user }}</td>
 					</tr>
