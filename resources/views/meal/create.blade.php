@@ -2,6 +2,7 @@
 @section('content')
 <h2 class="my-2">Add a meal</h2>
 @include('partials.errors')
+@include('partials.alert')
 <form action='{{ route('meal.store') }}' method="post">
 
 	@csrf

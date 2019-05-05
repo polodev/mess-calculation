@@ -121,6 +121,11 @@ class User extends Authenticatable implements HasMedia
   {
     return $this->belongsTo(Role::class);
   }
+
+  public function is_editable($user_id)
+  {
+    return $this->isAdmin() || $this->id == $user_id;
+  }
   
 
 

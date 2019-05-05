@@ -38,57 +38,56 @@
 <!-- /.card -->
 
 
-<div class='row'>
-	<div class='col-md-6'>
-		<div class='table-responsive'>
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Day </th>
-						@foreach ($users as $user)
-							<th>{{$user->display_name ? $user->display_name : $user->name }}</th>
-						@endforeach
-					</tr>
-					{{-- just keep it top as well --}}
-					<tr>
-						<th>Total: </th>
-						@foreach ($users as $user)
-							<th>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
-						@endforeach
-					</tr>
-				</thead>
-				<tfoot>
-					<tr>
-						<th>Total: </th>
-						@foreach ($users as $user)
-							<th>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
-						@endforeach
-					</tr>
-				</tfoot>
-				<tbody>
 
-					@foreach (range(1, $no_of_days_in_month) as $day)
-					<tr>
-						<td> <strong> {{ Helpers::formatted_date($year_month, $day) }} </strong> </td>
-						@foreach ($users as $user)
-							<td 
-								class="editable" 
-								contenteditable="true" 
-								data-year_month="{{ $year_month }}"
-								data-user_id="{{ $user->id }}"
-								data-day="{{ $day }}"
-							 >{{ Helpers::get_meal($user->id, $year_month, $day) }}</td>
-						@endforeach
+<div class='table-responsive'>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Day </th>
+				@foreach ($users as $user)
+					<th>{{$user->display_name ? $user->display_name : $user->name }}</th>
+				@endforeach
+			</tr>
+			{{-- just keep it top as well --}}
+			<tr>
+				<th>Total: </th>
+				@foreach ($users as $user)
+					<th>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
+				@endforeach
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>Total: </th>
+				@foreach ($users as $user)
+					<th>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
+				@endforeach
+			</tr>
+		</tfoot>
+		<tbody>
 
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
-		</div>
-	</div>
+			@foreach (range(1, $no_of_days_in_month) as $day)
+			<tr>
+				<td> <strong> {{ Helpers::formatted_date($year_month, $day) }} </strong> </td>
+				@foreach ($users as $user)
+					<td 
+						class="editable" 
+						data-test=" {{ auth()->user()->is_editable($user->id) }}";
+						@if( auth()->user()->is_editable($user->id) )
+							contenteditable="true" 
+						@endif
+
+						data-year_month="{{ $year_month }}"
+						data-user_id="{{ $user->id }}"
+						data-day="{{ $day }}"
+					 >{{ Helpers::get_meal($user->id, $year_month, $day) }}</td>
+				@endforeach
+
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
 </div>
-<!-- /.row -->
-
 @endsection
 
 @push('style')
