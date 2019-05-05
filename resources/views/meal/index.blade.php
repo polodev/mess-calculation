@@ -72,7 +72,6 @@
 				@foreach ($users as $user)
 					<td 
 						class="editable" 
-						data-test=" {{ auth()->user()->is_editable($user->id) }}";
 						@if( auth()->user()->is_editable($user->id) )
 							contenteditable="true" 
 						@endif
