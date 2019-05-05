@@ -17,8 +17,8 @@ trait HelperFunctions {
 	public static function meals()
 	{
 		$meals = [];
-		foreach (range(1, 14) as $day) {
-			$mutable = Carbon::now()->add($day, 'day');
+		foreach (range(0, 12) as $day) {
+			$mutable = Carbon::now()->sub($day, 'day');
 
 			foreach (range(1, 4) as $user_id) {
 				$meals[] = [

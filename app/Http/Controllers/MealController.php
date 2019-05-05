@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Meal;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MealController extends Controller
@@ -15,10 +16,14 @@ class MealController extends Controller
      */
     public function index()
     {
-      $meals = Meal::all();
+      $date = Carbon::now();
+      if (request('timeline')) {
+        $timeline = Carbon::parse(request('timeline'));
+        $timeline = $timeline->add(5, 'day');
+        $date = $timeline;
+      }
       $users = User::all();
-      // return $meals;
-      return view('meal.index', compact( 'users' ) );
+      return view('meal.index', compact( 'users', 'date' ) );
     }
 
     /**
@@ -46,7 +51,26 @@ class MealController extends Controller
             'date'    => 'required',
             'number_of_meal'  => 'required',
         ]);
-        return $request->all();
+        $user_id        = request('user_id');
+        $date           = request('date');
+        $number_of_meal = request('number_of_meal');
+        $date           = Carbon::parse($date);
+        // return $date;
+        // $date = Carbon::parse( '07-05-2019');
+        $meal = Meal::whereDate('date', $date)
+                  ->where('user_id', $user_id)
+                  ->first();
+        if ($meal) {
+          $meal->number_of_meal = $number_of_meal;
+          $meal->save();
+          return back()->withMessage('Meal Updated Successfully');
+        }
+        Meal::create([
+          'user_id'        => $user_id,
+          'number_of_meal' => $number_of_meal,
+          'date'           => $date,
+        ]);
+        return back()->withMessage('Meal Added successfully');
     }
 
     /**
