@@ -91,50 +91,53 @@
 		<p>
 			Total Cost = meal cost + common cost per user + other cost per user;
 		</p>
-		<table class='table table-striped table-bordered table-responsive'>
-			<thead>
-				<th>User</th>
-				<th>No of meal</th>
-				<th>Meal cost</th>
-				<th>Common cost</th>
-				<th>Others cost</th>
-				<th>Total Cost </th>
-				<th>user bazar</th>
-				<th>user balance</th>
-				<th>Get/Due</th>
-			</thead>
-			@foreach ($costs as $cost)
-		    <tr>
-					<td>
-						{{ $cost['user']->name }}
-					</td>
-					<td>
-						{{ $cost['number_of_meal'] }}
-					</td>
-					<td>
-						{{ $cost['meal_cost'] }}
-					</td>
-					<td>
-						{{ $common_cost_per_user }}
-					</td>
-					<td>
-						{{ $others_cost_per_user }}
-					</td>
-					<td>
-						{{ $cost['total_cost'] }}
-					</td>
-					<td>
-						{{ $cost['bazar'] }}
-					</td>
-					<td>
-						{{ $cost['balance'] }}
-					</td>
-					<td>
-						{{ $cost['get_or_due'] }}
-					</td>
-			  </tr>
-			@endforeach
-		</table>
+		<div class='table-responsive'>
+			<table class='table table-striped table-bordered'>
+				<thead>
+					<th>User</th>
+					<th>No of meal</th>
+					<th>Meal cost</th>
+					<th>Common cost</th>
+					<th>Others cost</th>
+					<th>Total Cost </th>
+					<th>user bazar</th>
+					<th>user balance</th>
+					<th>Get/Due</th>
+				</thead>
+				@foreach ($costs as $cost)
+			    <tr>
+						<td>
+							{{ $cost['user']->name }}
+						</td>
+						<td>
+							{{ $cost['number_of_meal'] }}
+						</td>
+						<td>
+							{{ $cost['meal_cost'] }}
+						</td>
+						<td>
+							{{ $common_cost_per_user }}
+						</td>
+						<td>
+							{{ $others_cost_per_user }}
+						</td>
+						<td>
+							{{ $cost['total_cost'] }}
+						</td>
+						<td>
+							{{ $cost['bazar'] }}
+						</td>
+						<td>
+							{{ $cost['balance'] }}
+						</td>
+						<td>
+							{{ $cost['get_or_due'] }}
+						</td>
+				  </tr>
+				@endforeach
+			</table>
+		</div>
+		<!-- /.table-responsive -->
 		<!-- /.table table-striped -->
 	</div>
 	<!-- /.card-body -->
