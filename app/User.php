@@ -45,6 +45,14 @@ class User extends Authenticatable implements HasMedia
     return $this->hasMany(Meal::class);
   }
 
+  public function debits()
+  {
+    return $this->hasMany(Debitcredit::class, 'debit_to');
+  }
+  public function credits()
+  {
+    return $this->hasMany(Debitcredit::class, 'credit_to');
+  }
 
   // mine function
 

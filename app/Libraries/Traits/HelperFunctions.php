@@ -39,12 +39,6 @@ trait HelperFunctions {
 
 	public static function bazars()
 	{
-// 		user_id
-// cost
-// type
-// date
-// more_info
-
 		$bazars = [];
 		foreach (range(0, 12) as $day) {
 			$mutable = Carbon::now()->sub($day, 'day');
@@ -61,6 +55,35 @@ trait HelperFunctions {
 		}
 		return $bazars;
 
+	}
+
+		/**
+	 * generate fake bazar data 
+	 * for seeding data
+	 */
+
+	public static function debitcredits()
+	{
+
+		$debitcredits = [];
+		foreach (range(0, 12) as $day) {
+			$mutable = Carbon::now()->sub($day, 'day');
+
+			foreach (range(1, 4) as $user_id) {
+				$user_ids = array_filter(range(1, 4), function ($value) use($user_id) {
+	      	return $value != $user_id;
+				});
+				$debit_to = $user_ids[array_rand($user_ids)];
+				$debitcredits[] = [
+					'credit_to' => $user_id,
+					'debit_to'  => $debit_to,
+					'date' => $mutable->toDateString(),
+					'amount'  => rand(200, 1000),
+					'more_info' => 'just deposit to some people',
+				];
+			}
+		}
+		return $debitcredits;
 
 	}
 
