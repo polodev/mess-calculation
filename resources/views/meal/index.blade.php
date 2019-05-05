@@ -111,6 +111,11 @@
 
 <script>
 
+/**
+ * updating mess member meal using ajax
+ * @param  el - dom element
+ * @return void
+ */
 function meal_inline_update(el) {
 	var $el = $(el);
 	var user_id = $el.data('user_id');
@@ -122,37 +127,40 @@ function meal_inline_update(el) {
 	 };
 	 axios.post( "{{ route('meal.inline_update') }}", data)
 	 			.then(function (response) {
-	 				console.log('response', response);
 	 				meal_inline_total_update(user_id)
 				 });
 }
 
- $(document).on('blur', '.editable', function(){
- 	meal_inline_update(this);
+/**
+ * update total meal of a mess member when he 
+ * update his meal
+ * @param  child_user_id - (int) - mess member id
+ * @return void (update dom)
+ */
+function meal_inline_total_update(child_user_id) {
+ $('.total_meal').each(function(index, el) {
+ 	var $el     = $(el);
+ 	var user_id = $el.data('user_id');
+ 	if (user_id == child_user_id) {
+		var data = {
+			year_month     : $el.data('year_month'),
+			user_id        : user_id,
+		};
+	  axios.post( "{{ route('meal.inline_total_update') }}", data)
+ 			.then(function (response) {
+ 				$el.text(response.data);
+			 });
+ 	}
+
  })
 
- function meal_inline_total_update(child_user_id) {
-	 $('.total_meal').each(function(index, el) {
-	 	var $el     = $(el);
-	 	var user_id = $el.data('user_id');
-	 	if (user_id == child_user_id) {
-			var data = {
-				year_month     : $el.data('year_month'),
-				user_id        : user_id,
-			};
-		  axios.post( "{{ route('meal.inline_total_update') }}", data)
-	 			.then(function (response) {
-	 				$el.text(response.data);
-				 });
-	 	}
-
-	 })
-
- }
+}
 
 
 
+$(document).on('blur', '.editable', function(){
+	meal_inline_update(this);
+})
 
-	// console.log('axios', axios);
 </script>
 @endpush
