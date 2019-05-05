@@ -12,7 +12,7 @@
 */
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('/', 'FrontController@index');
+	Route::get('/', 'FrontController@index')->name('front.index');
 	Route::resource('bazar', 'BazarController');
 	Route::resource('meal', 'MealController');
 	Route::post('meal-inline-update', 'MealController@inline_update')->name('meal.inline_update');
