@@ -17,7 +17,14 @@ class BazarController extends Controller
     public function index()
     {
       $year_month = Carbon::now();
-      $bazars = Bazar::paginate( 30 );
+      if (request('timeline')) {
+        $timeline = Carbon::parse(request('timeline'));
+        $timeline = $timeline->add(5, 'day');
+        $year_month = $timeline;
+      }
+      $year = $year_month->year;
+      $month = $year_month->month;
+      $bazars = Bazar::whereYear('date', $year)->whereMonth('date', $month)->paginate( 30 );
       return view( 'bazar.index', compact( 'bazars', 'year_month') );
 
     }
@@ -125,6 +132,8 @@ class BazarController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $bazar = Bazar::findOrFail($id);
+      $bazar->delete();
+      return back()->withMessage('Bazar Deleted Successfully');
     }
   }

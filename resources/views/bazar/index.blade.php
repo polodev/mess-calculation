@@ -10,6 +10,8 @@
 </div>
 <h1 class="my-3">All Bazar: {{ $year_month->monthName }}, {{ $year }}</h1>
 
+@include('partials.alert')
+
 <div class='card my-3'>
 	<div class='card-header'>
 		<h1>Timeline</h1>
