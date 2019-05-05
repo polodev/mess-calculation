@@ -63,7 +63,6 @@
 			</tr>
 		</thead>
 
-		@if(false)
 			<tfoot>
 				<tr>
 					<th>Total: </th>
@@ -76,7 +75,6 @@
 					@endforeach
 				</tr>
 			</tfoot>
-		@endif
 
 		<tbody>
 
