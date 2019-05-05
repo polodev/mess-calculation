@@ -88,14 +88,17 @@
 	</div>
 	<!-- /.card-header -->
 	<div class='card-body'>
-		<table class='table table-striped table-bordered'>
+		<p>
+			Total Cost = meal cost + common cost per user + other cost per user;
+		</p>
+		<table class='table table-striped table-bordered table-responsive'>
 			<thead>
 				<th>User</th>
 				<th>No of meal</th>
 				<th>Meal cost</th>
 				<th>Common cost</th>
 				<th>Others cost</th>
-				<th>Total Cost</th>
+				<th>Total Cost </th>
 				<th>user bazar</th>
 				<th>user balance</th>
 				<th>Get/Due</th>
