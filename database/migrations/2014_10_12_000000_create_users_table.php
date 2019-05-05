@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('others')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->boolean('enable')->default(true);
 
 
             $table->text('address')->nullable();

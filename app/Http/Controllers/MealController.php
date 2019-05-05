@@ -22,7 +22,7 @@ class MealController extends Controller
         $timeline = $timeline->add(5, 'day');
         $year_month = $timeline;
       }
-      $users = User::all();
+      $users = User::where('enable', 1)->get();
       return view('meal.index', compact( 'users', 'year_month' ) );
     }
 
