@@ -54,18 +54,30 @@
 			<tr>
 				<th>Total: </th>
 				@foreach ($users as $user)
-					<th>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
+					<th
+						data-user_id = "{{$user->id}}"
+						data-year_month = "{{ $year_month }}"
+						class="total_meal"
+					>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
 				@endforeach
 			</tr>
 		</thead>
-		<tfoot>
-			<tr>
-				<th>Total: </th>
-				@foreach ($users as $user)
-					<th>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
-				@endforeach
-			</tr>
-		</tfoot>
+
+		@if(false)
+			<tfoot>
+				<tr>
+					<th>Total: </th>
+					@foreach ($users as $user)
+						<th
+							data-user_id = "{{$user->id}}"
+							data-year_month = "{{ $year_month }}"
+							class="total_meal"
+						>{{ Helpers::get_meal_for_full_month($user->id, $year_month) }}</th>
+					@endforeach
+				</tr>
+			</tfoot>
+		@endif
+
 		<tbody>
 
 			@foreach (range(1, $no_of_days_in_month) as $day)
@@ -101,21 +113,44 @@
 
 function meal_inline_update(el) {
 	var $el = $(el);
+	var user_id = $el.data('user_id');
 	var data = {
 		 number_of_meal : $el.text(),
 		 year_month     : $el.data('year_month'),
 		 day            : $el.data('day'),
-		 user_id        : $el.data('user_id'),
+		 user_id        : user_id,
 	 };
 	 axios.post( "{{ route('meal.inline_update') }}", data)
 	 			.then(function (response) {
 	 				console.log('response', response);
+	 				meal_inline_total_update(user_id)
 				 });
 }
 
  $(document).on('blur', '.editable', function(){
  	meal_inline_update(this);
  })
+
+ function meal_inline_total_update(child_user_id) {
+	 $('.total_meal').each(function(index, el) {
+	 	var $el     = $(el);
+	 	var user_id = $el.data('user_id');
+	 	if (user_id == child_user_id) {
+			var data = {
+				year_month     : $el.data('year_month'),
+				user_id        : user_id,
+			};
+		  axios.post( "{{ route('meal.inline_total_update') }}", data)
+	 			.then(function (response) {
+	 				$el.text(response.data);
+				 });
+	 	}
+
+	 })
+
+ }
+
+
 
 
 	// console.log('axios', axios);

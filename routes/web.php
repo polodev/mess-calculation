@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('bazar', 'BazarController');
 	Route::resource('meal', 'MealController');
 	Route::post('meal-inline-update', 'MealController@inline_update')->name('meal.inline_update');
+	Route::post('meal-total-inline-update', 'MealController@inline_total_update')->name('meal.inline_total_update');
 });
 
 Auth::routes();

@@ -78,6 +78,25 @@ class MealController extends Controller
 
     }
 
+    public function inline_total_update(Request $request)
+    {
+      $user_id        = request('user_id');
+      $year_month     = Carbon::parse( request('year_month'));
+      
+      $month = $year_month->month;
+      $year = $year_month->year;
+      $meal = Meal::where('user_id', $user_id)
+                ->whereYear('date', $year)
+                ->whereMonth('date', $month)
+                ->get()->sum('number_of_meal');
+      if ($meal) {
+        return $meal;
+      }else {
+        return 0;
+      }
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
