@@ -40,7 +40,20 @@
 <!-- /.card -->
 
 
+
+
 <h1 class="mt-5 mb-3">Deposit Given: </h1>
+
+<div class='alert alert-info'>
+	<p class="my-2">
+		My balance [ Deposit-given ( {{$credits_total}} ) - Deposit-taken ( {{$debits_total}} )]
+		<br>
+		Tk ({{ $credits_total - $debits_total }})
+  </p>
+
+
+</div>
+<!-- /.alert alert-secondary -->
 
 <div class='table-responsive'>
 	<table class="table table-striped table-bordered">

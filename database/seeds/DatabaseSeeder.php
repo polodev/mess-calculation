@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
       $this->call(RolesTableSeeder::class);
       if (! config('app.only_role_seed')) {
         $this->call(UsersTableSeeder::class);
-        // $this->call(MealsTableSeeder::class);
-        // $this->call(BazarsTableSeeder::class);
-        // $this->call(DebitcreditsTableSeeder::class);
+        $this->call(MealsTableSeeder::class);
+        $this->call(BazarsTableSeeder::class);
+        $this->call(DebitcreditsTableSeeder::class);
       }
     }
   }
