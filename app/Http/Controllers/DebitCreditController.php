@@ -108,7 +108,9 @@ class DebitCreditController extends Controller
      */
     public function edit($id)
     {
-        //
+      $users = User::where('id', '<>', auth()->id())->get();
+      $debit_credit = Debitcredit::findOrFail($id);
+      return view('debit_credit.edit', compact( 'users', 'debit_credit' ) );
     }
 
     /**
@@ -120,7 +122,20 @@ class DebitCreditController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+        'date'    => 'required',
+        'amount'  => 'required',
+        'user_id' => 'required',
+      ]);
+
+      $debit_credit = Debitcredit::findOrFail($id);
+      $debit_credit->date = Carbon::parse(request('date'));
+      $debit_credit->debit_to = request('user_id');
+      $debit_credit->amount = request('amount');
+      $debit_credit->more_info = request('more_info');
+      $debit_credit->save();
+
+      return back()->withMessage('Deposit information Updated Successfully'); 
     }
 
     /**

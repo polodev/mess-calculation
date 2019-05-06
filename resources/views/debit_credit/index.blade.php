@@ -79,6 +79,9 @@
 						</a>
 					</td>
 					<td>
+						<a class="btn btn-secondary btn-sm" href="{{ route('debit-credit.edit', ['id' => $credit->id]) }}">
+							Edit
+						</a>
 						<form
 							onsubmit="return confirm('Are you sure you want to delete this entry?')"
 							method="post"

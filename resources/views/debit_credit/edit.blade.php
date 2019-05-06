@@ -1,11 +1,14 @@
 @extends('layouts.app')
 @section('content')
-<h2 class="my-2">Add a deposit info</h2>
+<h2 class="my-2">Edit the deposit info</h2>
 @include('partials.errors')
 @include('partials.alert')
-<form action='{{ route('debit-credit.store') }}' method="post">
+
+
+<form action='{{ route('debit-credit.update', ['id' => $debit_credit->id]) }}' method="post">
 
 	@csrf
+	@method('PUT')
 	<div class='form-group'>
 		<label for="date">Date of deposit</label>
 		<input type="text" name="date" class="form-control" id="date" required>
@@ -16,7 +19,7 @@
 		<select class="form-control" name="user_id" id="user_id">
 			@foreach ($users as $user)
 				<option
-					{{old('user_id') == $user->id ? 'selected' : ''}}
+					{{old('user_id', $debit_credit->user_id) == $user->id ? 'selected' : ''}}
 					value="{{$user->id}}">{{ $user->name }}</option>
 			@endforeach
 		</select>
@@ -25,12 +28,12 @@
 
 	<div class='form-group'>
 		<label for="amount">Amount</label>
-		<input value="{{ old('amount') }}" type='number' name='amount' id='amount' class="form-control" required />
+		<input value="{{ old('amount', $debit_credit->amount) }}" type='number' name='amount' id='amount' class="form-control" required />
 	</div>	
 
 	<div class='form-group'>
 		<label for="more_info">more_info</label>
-		<textarea type='text' name='more_info' id='more_info' class="form-control" >{{ old('more_info') }}</textarea>
+		<textarea type='text' name='more_info' id='more_info' class="form-control" >{{ old('more_info', $debit_credit->more_info) }}</textarea>
 	</div>
 
 	<div class='form-group'>
@@ -38,6 +41,13 @@
 	</div>
 	
 </form>
+
+<?php
+
+$db_date = $debit_credit->date->format('d-m-Y');
+$db_date = old('date', $db_date);
+
+?>
 @endsection
 
 @push('script')
@@ -45,9 +55,7 @@
 $("#date").flatpickr({
   dateFormat: "d-m-Y",
   maxDate: 'today',
- <?php if (old('date')): ?>
-  defaultDate: '{{ old('date') }}'
-<?php endif; ?>
+  defaultDate: '{{ $db_date }}'
 });
 </script>
 @endpush
