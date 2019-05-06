@@ -17,6 +17,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'only_role_seed' => env('ONLY_ROLE_SEED', true),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
