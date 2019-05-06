@@ -4,13 +4,13 @@ namespace App\Libraries;
 
 const users = [
   [
-    'name' => 'Shibu deb polo',
+    'name' => 'Shibu',
     'display_name' => 'Shibu',
     'email' => 'polodev10@gmail.com',
     'role_id' => 1,
   ],
   [
-    'name' => 'Mohammad Arif',
+    'name' => 'Arif',
     'display_name' => 'Arif',
     'email' => 'arif@gmail.com',
     'role_id' => 2,
@@ -22,7 +22,7 @@ const users = [
     'role_id' => 2,
   ],
   [
-    'name' => 'Rasel Islam',
+    'name' => 'Rasel',
     'display_name' => 'Rasel',
     'email' => 'rasel@gmail.com',
     'role_id' => 2,
