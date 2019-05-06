@@ -33,23 +33,13 @@ class FrontController extends Controller
       $total_meal           = Meal::FilterYearMonth($year_month)->sum('number_of_meal');
       $users                = User::where('enable', 1)->get();
 
-      //  I don't know why heroku giving me error
       $per_meal_cost        = 0;
-      $common_cost_per_user = 0;
-      $others_cost_per_user = 0;
-      if ($regular_bazars_cost > 5) {
-        $per_meal_cost        = $regular_bazars_cost / $total_meal;
-      }
-      if ($common_bazars_cost > 5) {
-        $common_cost_per_user = $common_bazars_cost / count( $users );
-      }
-      if ($others_bazars_cost > 5) {
-        $others_cost_per_user = $others_bazars_cost / count( $users ) ;
+      if ($total_meal) {
+        $per_meal_cost        = $regular_bazars_cost ? $regular_bazars_cost / $total_meal : 0;
       }
 
-      // $per_meal_cost        = number_format( $per_meal_cost, 2 );
-      // $common_cost_per_user        = number_format( $common_cost_per_user, 2 );
-      // $others_cost_per_user        = number_format( $others_cost_per_user, 2 );
+      $common_cost_per_user = $common_bazars_cost ?  $common_bazars_cost / count( $users ) : 0;
+      $others_cost_per_user = $others_bazars_cost ?  $others_bazars_cost / count( $users ) : 0;
 
      	$costs = [];
      	foreach ($users as $user) {
