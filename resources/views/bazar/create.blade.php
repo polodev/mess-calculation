@@ -63,7 +63,7 @@
 
 	<div class='form-group'>
 		<label for="more_info">More Information of Bazar (optional)</label>
-		<textarea name="more_info" class="form-control" id="more_info">{{ old('more_info') }}</textarea>
+		<textarea rows="10" name="more_info" class="form-control" id="more_info">{{ old('more_info') }}</textarea>
 	</div>
 
 	<div class='form-group'>
