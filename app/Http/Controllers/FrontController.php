@@ -38,13 +38,13 @@ class FrontController extends Controller
       $common_cost_per_user = 0;
       $others_cost_per_user = 0;
       if ($regular_bazars_cost > 5) {
-        $per_meal_cost        = $regular_bazars_cost > 0 ? $regular_bazars_cost / $total_meal : 0;
+        $per_meal_cost        = $regular_bazars_cost / $total_meal;
       }
       if ($common_bazars_cost > 5) {
-        $common_cost_per_user = $common_bazars_cost > 0 ?  $common_bazars_cost / count( $users ) : 0;
+        $common_cost_per_user = $common_bazars_cost / count( $users );
       }
       if ($others_bazars_cost > 5) {
-        $others_cost_per_user = $others_bazars_cost > 0 ?  $others_bazars_cost / count( $users ) : 0;
+        $others_cost_per_user = $others_bazars_cost / count( $users ) ;
       }
 
       // $per_meal_cost        = number_format( $per_meal_cost, 2 );
