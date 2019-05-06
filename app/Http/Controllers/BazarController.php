@@ -39,7 +39,7 @@ class BazarController extends Controller
         'year_month',
         'regular_bazars_cost',
         'common_bazars_cost',
-        'others_bazars_cost',
+        'others_bazars_cost'
       );
       return view( 'bazar.index', $data);
 
