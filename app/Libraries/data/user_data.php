@@ -6,7 +6,7 @@ const users = [
   [
     'name' => 'Shibu',
     'display_name' => 'Shibu',
-    'email' => 'polodev10@gmail.com',
+    'email' => 'polo@gmail.com',
     'role_id' => 1,
   ],
   [

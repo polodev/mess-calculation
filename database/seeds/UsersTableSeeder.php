@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
           'name' => $user['name'],
           'email' => $user['email'],
           'display_name' => $user['display_name'],
-          'password' => bcrypt('bangladesh101'),
+          'password' => bcrypt('hello1'),
           'role_id' => $user['role_id'],
         ]);
       }
