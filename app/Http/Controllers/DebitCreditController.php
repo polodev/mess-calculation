@@ -75,23 +75,17 @@ class DebitCreditController extends Controller
       $this->validate($request, [
         'date'    => 'required',
         'amount'  => 'required',
+        'user_id' => 'required',
       ]);
 
-      $user_id        = request('user_id');
-      $auth_user = auth()->user();
-      if ($auth_user->isAdmin() || !$user_id) {
-        $user_id = $auth_user->id;
-      }
-
-      Bazar::create([
+      Debitcredit::create([
         'date'      => Carbon::parse(request('date')),
-        'user_id'   => $user_id,
-        'type'      => request('type'),
-        'cost'      => request('cost'),
-        'title'     => request('title'),
+        'credit_to' => auth()->id(),
+        'debit_to'  => request('user_id'),
+        'amount'    => request('amount'),
         'more_info' => request('more_info'),
       ]);
-      return back()->withMessage('Bazar Added Successfully');
+      return back()->withMessage('Deposit information Added Successfully');
     }
 
     /**
