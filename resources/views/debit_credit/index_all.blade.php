@@ -67,7 +67,9 @@
 						{{ $debit_credit->debitor->name }}
 					</td>
 					<td>
-						{{ $debit_credit->amount }}
+						<a href="{{ route('debit-credit.show', ['id' => $debit_credit->id]) }}">
+							{{ $debit_credit->amount }}
+						</a>
 					</td>
 				</tr>
 			@endforeach

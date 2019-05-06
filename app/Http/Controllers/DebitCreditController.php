@@ -82,7 +82,8 @@ class DebitCreditController extends Controller
      */
     public function show($id)
     {
-        //
+      $debit_credit = Debitcredit::findOrFail($id);
+      return view( 'debit_credit.show', compact( 'debit_credit' ) );
     }
 
     /**
@@ -116,6 +117,8 @@ class DebitCreditController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $debit_credit =  Debitcredit::find($id);
+        $debit_credit->delete();
+        return back()->withMessage('Entry deleted successfully');
     }
   }
