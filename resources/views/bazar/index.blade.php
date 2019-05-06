@@ -78,6 +78,7 @@
 				<th>Date </th>
 				<th>User </th>
 				<th>Type </th>
+				<th>Title </th>
 				<th>Cost </th>
 				<th>Action</th>
 			</tr>
@@ -94,6 +95,9 @@
 					</td>
 					<td>
 						{{ $bazar->type }}
+					</td>
+					<td>
+						{{ $bazar->title }}
 					</td>
 					<td>
 						<a href="{{ route('bazar.show', ['bazar' => $bazar->id]) }}">

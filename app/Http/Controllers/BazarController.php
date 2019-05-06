@@ -80,6 +80,7 @@ class BazarController extends Controller
         'user_id'   => $user_id,
         'type'      => request('type'),
         'cost'      => request('cost'),
+        'title'     => request('title'),
         'more_info' => request('more_info'),
       ]);
       return back()->withMessage('Bazar Added Successfully');
@@ -122,7 +123,7 @@ class BazarController extends Controller
       $this->validate($request, [
         'date'    => 'required',
         'type'    => 'required',
-        'cost'    => 'required'
+        'cost'    => 'required',
       ]);
 
       $user_id        = request('user_id');
@@ -135,6 +136,7 @@ class BazarController extends Controller
       $bazar->user_id   = $user_id;
       $bazar->type      = request('type');
       $bazar->cost      = request('cost');
+      $bazar->title     = request('title');
       $bazar->more_info = request('more_info');
       $bazar->save();
 

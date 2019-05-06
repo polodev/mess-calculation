@@ -18,6 +18,7 @@ class CreateBazarsTable extends Migration
             $table->bigInteger('user_id');
             $table->integer('cost');
             $table->string('type')->default('regular'); // ['regular', 'common']
+            $table->string('title')->nullable(); // ['regular', 'common']
             $table->date('date');
             $table->text('more_info')->nullable();
             $table->timestamps();

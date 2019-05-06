@@ -46,6 +46,7 @@ trait HelperFunctions {
 			foreach (range(1, 4) as $user_id) {
 				$bazars[] = [
 					'user_id' => $user_id,
+					'title'   => 'meat and others item',
 					'date' => $mutable->toDateString(),
 					'type' => Helpers::types[array_rand(Helpers::types)],
 					'more_info' => 'just some bazars',

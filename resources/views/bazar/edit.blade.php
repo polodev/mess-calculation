@@ -46,6 +46,11 @@
 	</div>
 
 	<div class='form-group'>
+		<label for="title">title (little info) - make it short - 2 or 3 words</label>
+		<input value="{{ old('title', $bazar->title) }}" type='text' name='title' id='title' class="form-control" />
+	</div>
+
+	<div class='form-group'>
 		<label for="more_info">More Information of Bazar (optional)</label>
 		<textarea name="more_info" class="form-control" id="more_info">{{ old('more_info', $bazar->more_info) }}</textarea>
 	</div>
@@ -58,7 +63,8 @@
 
 <?php
 
-$db_date = $bazar->date->isoFormat('d-m-Y');
+$db_date = $bazar->date->format('d-m-Y');
+$db_date = old('date', $db_date);
 
 ?>
 @endsection
@@ -68,9 +74,7 @@ $db_date = $bazar->date->isoFormat('d-m-Y');
 $("#date").flatpickr({
   dateFormat: "d-m-Y",
   maxDate: 'today',
- <?php if (old('date', $db_date)): ?>
-  defaultDate: '{{ old('date', $db_date) }}'
-<?php endif; ?>
+  defaultDate: '{{ $db_date }}'
 });
 </script>
 @endpush

@@ -57,6 +57,11 @@
 	</div>
 
 	<div class='form-group'>
+		<label for="title">title (little info) - make it short - 2 or 3 words</label>
+		<input value="{{ old('title') }}" type='text' name='title' id='title' class="form-control" />
+	</div>
+
+	<div class='form-group'>
 		<label for="more_info">More Information of Bazar (optional)</label>
 		<textarea name="more_info" class="form-control" id="more_info">{{ old('more_info') }}</textarea>
 	</div>
