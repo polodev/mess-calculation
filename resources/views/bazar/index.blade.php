@@ -86,7 +86,8 @@
 			@foreach ($bazars as $bazar)
 				<tr>
 					<td>
-						{{ $bazar->date->toFormattedDateString() }}
+						{{ $bazar->date->toFormattedDateString() }} -
+						({{ $bazar->date->shortEnglishDayOfWeek }})
 					</td>
 					<td>
 						{{ $bazar->user->name }}

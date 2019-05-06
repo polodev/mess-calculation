@@ -15,12 +15,19 @@
 
       <!-- Right Side Of Navbar -->
       <ul class='navbar-nav'>
-      	<li class='nav-item'>
+      	<li class='nav-item {{ request()->is( 'bazar' ) ? "active" : "" }}'>
       		<a href="{{ route('bazar.index') }}" class="nav-link">Bazar</a>
       	</li>
-      	<li class='nav-item'>
+      	<li class='nav-item {{ request()->is( 'meal' )  ? "active" : "" }}  '>
       		<a href="{{ route('meal.index') }}" class="nav-link">Meal</a>
       	</li>
+
+        <li class='nav-item {{ request()->is( 'debit-credit' ) ? "active" : "" }} '>
+          <a href="{{ route('debit-credit.index') }}" class="nav-link">My Debit Credit</a>
+        </li>
+        <li class='nav-item {{ request()->is( 'debit-credit-all' ) ? "active" : "" }} '>
+          <a href="{{ route('debit-credit.index_all') }}" class="nav-link">All Debit Credit</a>
+        </li>
 
       	<!-- /.nav-item -->
       </ul>

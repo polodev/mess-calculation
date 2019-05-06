@@ -141,7 +141,7 @@ trait HelperFunctions {
 		$month = $year_month->month;
 		$year = $year_month->year;
 		$return_date =  Carbon::createFromDate($year, $month, $day)
-											->englishDayOfWeek;
+											->shortEnglishDayOfWeek;
 		return $return_date;
 	}
 

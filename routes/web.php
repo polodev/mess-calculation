@@ -15,6 +15,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/', 'FrontController@index')->name('front.index');
 	Route::resource('bazar', 'BazarController');
 	Route::resource('meal', 'MealController');
+	Route::resource('debit-credit', 'DebitCreditController');
+	Route::get('debit-credit-all', 'DebitCreditController@index_all')->name('debit-credit.index_all');
 	Route::post('meal-inline-update', 'MealController@inline_update')->name('meal.inline_update');
 	Route::post('meal-total-inline-update', 'MealController@inline_total_update')->name('meal.inline_total_update');
 });
