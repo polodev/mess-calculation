@@ -32,9 +32,9 @@ class FrontController extends Controller
                               ->sum('cost');
       $total_meal           = Meal::FilterYearMonth($year_month)->sum('number_of_meal');
       $users                = User::where('enable', 1)->get();
-      $per_meal_cost        = $regular_bazars_cost ? $regular_bazars_cost / $total_meal : 0;
-      $common_cost_per_user = $common_bazars_cost ?  $common_bazars_cost / count( $users ) : 0;
-      $others_cost_per_user = $others_bazars_cost ?  $others_bazars_cost / count( $users ) : 0;
+      $per_meal_cost        = $regular_bazars_cost > 0 ? $regular_bazars_cost / $total_meal : 0;
+      $common_cost_per_user = $common_bazars_cost > 0 ?  $common_bazars_cost / count( $users ) : 0;
+      $others_cost_per_user = $others_bazars_cost > 0 ?  $others_bazars_cost / count( $users ) : 0;
       // $per_meal_cost        = number_format( $per_meal_cost, 2 );
       // $common_cost_per_user        = number_format( $common_cost_per_user, 2 );
       // $others_cost_per_user        = number_format( $others_cost_per_user, 2 );
