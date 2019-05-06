@@ -60,7 +60,8 @@ class DebitCreditController extends Controller
      */
     public function create()
     {
-        //
+      $users = User::where('id', '<>', auth()->id())->get();
+      return view('debit_credit.create', compact( 'users' ));
     }
 
     /**
@@ -71,7 +72,26 @@ class DebitCreditController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request, [
+        'date'    => 'required',
+        'amount'  => 'required',
+      ]);
+
+      $user_id        = request('user_id');
+      $auth_user = auth()->user();
+      if ($auth_user->isAdmin() || !$user_id) {
+        $user_id = $auth_user->id;
+      }
+
+      Bazar::create([
+        'date'      => Carbon::parse(request('date')),
+        'user_id'   => $user_id,
+        'type'      => request('type'),
+        'cost'      => request('cost'),
+        'title'     => request('title'),
+        'more_info' => request('more_info'),
+      ]);
+      return back()->withMessage('Bazar Added Successfully');
     }
 
     /**

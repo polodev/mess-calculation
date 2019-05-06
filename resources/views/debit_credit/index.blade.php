@@ -5,11 +5,9 @@
 	$year = $year_month->year;
 	$no_of_days_in_month = $year_month->daysInMonth ;
 ?>
-@if(false)
-	<div class="my-2">
-		<a class="btn btn-info" href="{{ route('debit-credit.create') }}">Add Deposit information</a>
-	</div>
-@endif
+<div class="my-2">
+	<a class="btn btn-info" href="{{ route('debit-credit.create') }}">Add Deposit information</a>
+</div>
 <h1 class="my-3">My debit-credit of - {{ $year_month->monthName }}, {{ $year }}</h1>
 
 @include('partials.alert')
