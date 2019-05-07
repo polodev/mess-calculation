@@ -19,8 +19,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('debit-credit-all', 'DebitCreditController@index_all')->name('debit-credit.index_all');
 	Route::post('meal-inline-update', 'MealController@inline_update')->name('meal.inline_update');
 	Route::post('meal-total-inline-update', 'MealController@inline_total_update')->name('meal.inline_total_update');
+  Route::get('/home', 'HomeController@index')->name('home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/about', function() {
+  return view('about');
+})->name('about');

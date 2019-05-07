@@ -28,6 +28,9 @@
         <li class='nav-item {{ request()->is( 'debit-credit-all' ) ? "active" : "" }} '>
           <a href="{{ route('debit-credit.index_all') }}" class="nav-link">All Debit Credit</a>
         </li>
+        <li class='nav-item {{ request()->is( 'about' ) ? "active" : "" }} '>
+          <a href="{{ route('about') }}" class="nav-link">About</a>
+        </li>
 
       	<!-- /.nav-item -->
       </ul>
