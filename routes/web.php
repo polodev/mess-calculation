@@ -20,6 +20,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('meal-inline-update', 'MealController@inline_update')->name('meal.inline_update');
 	Route::post('meal-total-inline-update', 'MealController@inline_total_update')->name('meal.inline_total_update');
   Route::get('/home', 'HomeController@index')->name('home');
+
+  Route::get('/user-month', 'UserMonthController@index' );
 });
 
 Auth::routes();
