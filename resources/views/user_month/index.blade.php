@@ -1,9 +1,13 @@
 @extends('layouts.app')
 @section('content')
-<div class="mt-2">
+
+@if(auth()->user()->isAdmin())
+<div class="">
   <a class="btn btn-info" href="{{ route('user-month.create') }}">Add user member</a>
 </div>
-<h2>Mess member in each month</h2>
+@endif
+
+<h2 class="my-3">Mess member in each month</h2>
 
 <table class="table table-bordered table-striped">
   <thead>
@@ -29,18 +33,16 @@
         <td>
            {{ $single_data['users'] }}
         </td>
-        <td>
-            @if(auth()->user()->isAdmin())
-              <a class="btn btn-secondary btn-sm" href="{{ route('user-month.edit', ['user-month' => $user_month->id]) }}">Edit</a>
-              <form onsubmit="return confirm('Are you sure you want to delete this entry?')" method="post" class="d-inline" action="{{ route('user-month.destroy', ['user-month' => $user_month->id]) }}">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger btn-sm" type="submit">DELETE</button>
-              </form>
-            @else
-              Not applicable
-            @endif
+        @if(auth()->user()->isAdmin())
+          <td>
+            <a class="btn btn-secondary btn-sm" href="{{ route('user-month.edit', ['user-month' => $user_month->id]) }}">Edit</a>
+            <form onsubmit="return confirm('Are you sure you want to delete this entry?')" method="post" class="d-inline" action="{{ route('user-month.destroy', ['user-month' => $user_month->id]) }}">
+              @csrf
+              @method('DELETE')
+              <button class="btn btn-danger btn-sm" type="submit">DELETE</button>
+            </form>
           </td>
+        @endif
       </tr>
     @endforeach
   </tbody>

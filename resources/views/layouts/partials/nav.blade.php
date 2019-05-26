@@ -31,6 +31,9 @@
         <li class='nav-item {{ request()->is( 'about' ) ? "active" : "" }} '>
           <a href="{{ route('about') }}" class="nav-link">About</a>
         </li>
+        <li class='nav-item {{ request()->is( 'user-month' ) ? "active" : "" }} '>
+          <a href="{{ route('user-month.index') }}" class="nav-link">User-Month</a>
+        </li>
 
       	<!-- /.nav-item -->
       </ul>

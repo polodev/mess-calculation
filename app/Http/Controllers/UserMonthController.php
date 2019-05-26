@@ -59,13 +59,27 @@ class UserMonthController extends Controller
    */
   public function store(Request $request)
   {
+    $this->validate($request, [
+      'year_month' => 'required',
+      'user_ids'  => 'required',
+    ]);
     $year_month = Helpers::generating_year_month( request( 'year_month' ) );
-    $user_ids      = request('user_ids');
-    $data = [
-      'year_month' => $year_month,
-      'user_ids'   => $user_ids,
-    ];
-    return $data;
+    $user_ids   =  json_encode( request('user_ids') );
+
+    $user_month = UserMonth::whereYear('year_month', $year_month->year)
+                ->whereMonth('year_month', $year_month->month)
+                ->first();
+    if ($user_month) {
+      $user_month->year_month = $year_month;
+      $user_month->user_ids = $user_ids;
+      $user_month->save();
+    } else {
+      $user_month = new UserMonth;
+      $user_month->year_month = $year_month;
+      $user_month->user_ids = $user_ids;
+      $user_month->save();
+    }
+    return back()->withMessage('User month update successfully');
   }
 
   /**
@@ -110,6 +124,7 @@ class UserMonthController extends Controller
    */
   public function destroy($id)
   {
-      //
+    UserMonth::findOrFail($id)->delete();
+    return back()->withMessage('Deleted successfully');
   }
 }
