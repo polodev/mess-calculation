@@ -16,12 +16,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('bazar', 'BazarController');
 	Route::resource('meal', 'MealController');
 	Route::resource('debit-credit', 'DebitCreditController');
+  Route::resource('/user-month', 'UserMonthController' );
 	Route::get('debit-credit-all', 'DebitCreditController@index_all')->name('debit-credit.index_all');
 	Route::post('meal-inline-update', 'MealController@inline_update')->name('meal.inline_update');
 	Route::post('meal-total-inline-update', 'MealController@inline_total_update')->name('meal.inline_total_update');
   Route::get('/home', 'HomeController@index')->name('home');
 
-  Route::get('/user-month', 'UserMonthController@index' );
 });
 
 Auth::routes();

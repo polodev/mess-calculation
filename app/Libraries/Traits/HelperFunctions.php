@@ -9,9 +9,9 @@ use Carbon\Carbon;
 
 
 trait HelperFunctions {
-	
+
 	/**
-	 * generate fake meal data 
+	 * generate fake meal data
 	 * for seeding data
 	 */
 
@@ -33,7 +33,7 @@ trait HelperFunctions {
 	}
 
 	/**
-	 * generate fake bazar data 
+	 * generate fake bazar data
 	 * for seeding data
 	 */
 
@@ -59,7 +59,7 @@ trait HelperFunctions {
 	}
 
 		/**
-	 * generate fake bazar data 
+	 * generate fake bazar data
 	 * for seeding data
 	 */
 
@@ -91,7 +91,7 @@ trait HelperFunctions {
 	/**
 	 * get a single date meal by carbon date and user_id
 	 */
-	public static function get_meal($user_id, $year_month, $day) 
+	public static function get_meal($user_id, $year_month, $day)
 	{
 		$month = $year_month->month;
 		$year = $year_month->year;
@@ -109,7 +109,7 @@ trait HelperFunctions {
 	/**
 	 * get meals by carbon date and user_id
 	 */
-	public static function get_meal_for_full_month($user_id, $year_month) 
+	public static function get_meal_for_full_month($user_id, $year_month)
 	{
 		$month = $year_month->month;
 		$year = $year_month->year;
@@ -122,15 +122,15 @@ trait HelperFunctions {
 		}else {
 			return 0;
 		}
-	
+
 	}
 
 	/**
-	 * generating formatted date from date, and day 
-	 * $year_month - carbon instance 
-	 * day of the month 
+	 * generating formatted date from date, and day
+	 * $year_month - carbon instance
+	 * day of the month
 	 */
-	
+
 	public static function formatted_date($year_month, $day) {
 		$month = $year_month->month;
 		$year = $year_month->year;
@@ -145,6 +145,19 @@ trait HelperFunctions {
 											->shortEnglishDayOfWeek;
 		return $return_date;
 	}
+  /**
+   * generating year month from a date
+   * @param  string date
+   * @return Carbon instance
+   */
+  public static function generating_year_month($date_string) {
+    $year_month = Carbon::parse($date_string);
+    // generating date
+    $month = $year_month->month;
+    $year = $year_month->year;
+    $date =  Carbon::createFromDate($year, $month, 1);
+    return $date;
+  }
 
 
 

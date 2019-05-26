@@ -24,7 +24,8 @@ class UserMonthsTableSeeder extends Seeder
         ],
         [
           'ym' => Carbon::now()->sub(65, 'day'),
-          'uds' => [3, 4, 5],
+          // 'uds' => [3, 4, 5],
+          'uds' => [3, 4, 1],
         ],
       ];
 

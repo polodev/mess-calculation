@@ -27,12 +27,12 @@
 		<label for="number_of_meal">Number Of Meal</label>
 		<input value="{{ old('number_of_meal') }}" type='number' name='number_of_meal' id='number_of_meal' class="form-control" />
 	</div>
-	
+
 
 	<div class='form-group'>
 		<button class="btn btn-info" type="submit">Add</button>
 	</div>
-	
+
 </form>
 @endsection
 
