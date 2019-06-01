@@ -35,7 +35,6 @@
         </td>
         @if(auth()->user()->isAdmin())
           <td>
-            <a class="btn btn-secondary btn-sm" href="{{ route('user-month.edit', ['user-month' => $user_month->id]) }}">Edit</a>
             <form onsubmit="return confirm('Are you sure you want to delete this entry?')" method="post" class="d-inline" action="{{ route('user-month.destroy', ['user-month' => $user_month->id]) }}">
               @csrf
               @method('DELETE')

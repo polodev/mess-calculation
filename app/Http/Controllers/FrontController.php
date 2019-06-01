@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class FrontController extends Controller
 {
 
-	public function index() 
+	public function index()
 	{
 		 $year_month = Carbon::now();
       if (request('timeline')) {
@@ -22,16 +22,21 @@ class FrontController extends Controller
       }
 
       $regular_bazars_cost  = Bazar::FilterYearMonth($year_month)
+                               ->filterActiveUser($year_month)
                                ->where('type', 'regular')
                                 ->sum('cost');
       $common_bazars_cost   = Bazar::FilterYearMonth($year_month)
+                               ->filterActiveUser($year_month)
                                ->where('type', 'common')
                                 ->sum('cost');
       $others_bazars_cost   = Bazar::FilterYearMonth($year_month)
+                               ->filterActiveUser($year_month)
                              ->where('type', 'others')
                               ->sum('cost');
-      $total_meal           = Meal::FilterYearMonth($year_month)->sum('number_of_meal');
-      $users                = User::where('enable', 1)->get();
+      $total_meal           = Meal::FilterYearMonth($year_month)
+                               ->filterActiveUser($year_month)
+                              ->sum('number_of_meal');
+      $users                = User::get_active_users($year_month);
 
       $per_meal_cost        = 0;
       if ($total_meal) {

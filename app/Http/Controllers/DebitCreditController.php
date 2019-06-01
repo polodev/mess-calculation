@@ -135,7 +135,7 @@ class DebitCreditController extends Controller
       $debit_credit->more_info = request('more_info');
       $debit_credit->save();
 
-      return back()->withMessage('Deposit information Updated Successfully'); 
+      return back()->withMessage('Deposit information Updated Successfully');
     }
 
     /**

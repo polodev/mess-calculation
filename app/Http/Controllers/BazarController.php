@@ -24,16 +24,21 @@ class BazarController extends Controller
       }
 
       $regular_bazars_cost = Bazar::FilterYearMonth($year_month)
+                       ->filterActiveUser($year_month)
                        ->where('type', 'regular')
                         ->sum('cost');
       $common_bazars_cost = Bazar::FilterYearMonth($year_month)
+                       ->filterActiveUser($year_month)
                        ->where('type', 'common')
                         ->sum('cost');
       $others_bazars_cost = Bazar::FilterYearMonth($year_month)
+                       ->filterActiveUser($year_month)
                        ->where('type', 'others')
                         ->sum('cost');
 
-      $bazars = Bazar::FilterYearMonth($year_month)->get();
+      $bazars = Bazar::FilterYearMonth($year_month)
+               ->filterActiveUser($year_month)
+              ->get();
       $data = compact(
         'bazars',
         'year_month',

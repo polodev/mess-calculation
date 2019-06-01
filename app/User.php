@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Libraries\Helpers;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -33,8 +34,8 @@ class User extends Authenticatable implements HasMedia
     $this->addMediaCollection('avatar')->singleFile();
   }
 
-  // relationship 
-  // 
+  // relationship
+  //
   public function bazars()
   {
     return $this->hasMany(Bazar::class);
@@ -68,8 +69,40 @@ class User extends Authenticatable implements HasMedia
   {
     return $this->role->id == 3;
   }
-  
-  
+
+  public static function get_active_users($year_month) {
+      $month = $year_month->month;
+      $year = $year_month->year;
+      $user_month = UserMonth::whereYear('year_month', $year)
+                ->whereMonth('year_month', $month)->first();
+      if ($user_month) {
+        // get users_ids and return users collection
+        $ids = json_decode( $user_month->user_ids );
+        return User::whereIn('id', $ids)->get();
+      } else {
+        // get active users store inside  and return users
+        // get enable users id
+        $users = User::where('enable', 1)->get();
+        $user_ids = $users->pluck('id');
+        $year_month = Helpers::generating_year_month($year_month);
+        $user_month = new UserMonth;
+        $user_month->year_month = $year_month;
+        $user_month->user_ids = $user_ids;
+        $user_month->save();
+        return $users;
+      }
+
+  }
+  public static function get_active_user_ids ($year_month) {
+    $users = self::get_active_users($year_month);
+    if ($users) {
+      return $users->pluck('id');
+    }else {
+      return [];
+    }
+  }
+
+
 
   public function hasRole($role)
   {
@@ -135,10 +168,10 @@ class User extends Authenticatable implements HasMedia
     return $this->id == $user_id;
     return $this->isAdmin() || $this->id == $user_id;
   }
-  
 
 
-  
+
+
 
   public function setNameAttribute($value)
   {

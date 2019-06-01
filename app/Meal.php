@@ -19,4 +19,11 @@ class Meal extends Model
      $month = $year_month->month;
      $query->whereYear('date', $year)->whereMonth('date', $month);
   }
+  public function scopeFilterActiveUser($query, $year_month)
+  {
+     $user_ids = User::get_active_user_ids($year_month);
+     $year = $year_month->year;
+     $month = $year_month->month;
+     $query->whereIn('user_id', $user_ids);
+  }
 }

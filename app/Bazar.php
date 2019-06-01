@@ -9,7 +9,7 @@ class Bazar extends Model
 	protected $guarded = [];
 	protected $dates = ['date'];
 
-	public function user() 
+	public function user()
 	{
 		return $this->belongsTo(User::class);
 	}
@@ -18,6 +18,13 @@ class Bazar extends Model
   	 $year = $year_month->year;
      $month = $year_month->month;
      $query->whereYear('date', $year)->whereMonth('date', $month);
+  }
+  public function scopeFilterActiveUser($query, $year_month)
+  {
+     $user_ids = User::get_active_user_ids($year_month);
+     $year = $year_month->year;
+     $month = $year_month->month;
+     $query->whereIn('user_id', $user_ids);
   }
 
 }

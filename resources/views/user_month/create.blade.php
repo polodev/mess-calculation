@@ -42,7 +42,6 @@
 
 @push('script')
 <script>
-$("#date");
 $('#user_ids').select2();
 </script>
 @endpush

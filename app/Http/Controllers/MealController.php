@@ -22,7 +22,7 @@ class MealController extends Controller
         $timeline = $timeline->add(5, 'day');
         $year_month = $timeline;
       }
-      $users = User::where('enable', 1)->get();
+      $users = User::get_active_users($year_month);
       return view('meal.index', compact( 'users', 'year_month' ) );
     }
 
@@ -67,7 +67,7 @@ class MealController extends Controller
       $year_month     = Carbon::parse( request('year_month'));
       $day            = request('day');
 
-      // generating date 
+      // generating date
       $month = $year_month->month;
       $year = $year_month->year;
       $date =  Carbon::createFromDate($year, $month, $day);
@@ -82,7 +82,7 @@ class MealController extends Controller
     {
       $user_id        = request('user_id');
       $year_month     = Carbon::parse( request('year_month'));
-      
+
       $month = $year_month->month;
       $year = $year_month->year;
       $meal = Meal::where('user_id', $user_id)

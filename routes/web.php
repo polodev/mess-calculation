@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +31,9 @@ Auth::routes();
 Route::get('/about', function() {
   return view('about');
 })->name('about');
+
+Route::get('/test', function() {
+  $year_month = Carbon::now();
+  $users = User::get_active_user_ids($year_month);
+  return $users;
+})->name('test');

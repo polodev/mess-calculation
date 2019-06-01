@@ -16,9 +16,9 @@
 		<form action='{{ route('front.index') }}'>
 			<div class='form-group'>
 				<input type="text"
-					name="timeline" 
-					autocomplete="off" 
-					placeholder="Select a month" 
+					name="timeline"
+					autocomplete="off"
+					placeholder="Select a month"
 	        class="datepicker-here form-control"
 	        data-language='en'
 	        data-min-view="months"
@@ -64,6 +64,16 @@
 						<th>Total user</th>
 						<td>{{ count($users) }} person</td>
 					</tr>
+          <tr>
+            <th>Users </th>
+            <td>
+              <?php
+                $user_names  = $users->pluck('name')->toArray();
+                echo implode(', ', $user_names);
+
+               ?>
+            </td>
+          </tr>
 					<tr>
 						<th>Per meal cost</th>
 						<td>Tk. {{ $per_meal_cost }}</td>
