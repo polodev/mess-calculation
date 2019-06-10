@@ -17,13 +17,13 @@
 <div class='card my-3'>
 	<div class='card-header'>
 		<h1>Timeline</h1>
-		<form action='{{ route('debit-credit.index') }}'>
+		<form action='{{ route('debit-credit.index_all') }}'>
 			<div class='form-group'>
 				{{-- <input type='text' name='timeline' id='timeline' class="form-control" /> --}}
 				<input type="text"
-					name="timeline" 
-					autocomplete="off" 
-					placeholder="Select a month" 
+					name="timeline"
+					autocomplete="off"
+					placeholder="Select a month"
 	        class="datepicker-here form-control"
 	        data-language='en'
 	        data-min-view="months"

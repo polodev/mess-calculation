@@ -27,5 +27,11 @@ const users = [
     'email' => 'rasel@gmail.com',
     'role_id' => 2,
   ],
+  [
+    'name' => 'Rasel',
+    'display_name' => 'Rasel',
+    'email' => 'rasel@gmail.com',
+    'role_id' => 2,
+  ],
 
 ];
