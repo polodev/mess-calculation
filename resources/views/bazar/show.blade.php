@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<th>Mor Info:</th>
-				<td>{{ nl2br( $bazar->more_info ) }}</td>
+				<td>{!! nl2br( $bazar->more_info ) !!}</td>
 			</tr>
 
 		</table>
