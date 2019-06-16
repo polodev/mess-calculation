@@ -28,9 +28,9 @@ const users = [
     'role_id' => 2,
   ],
   [
-    'name' => 'Rasel',
-    'display_name' => 'Rasel',
-    'email' => 'rasel@gmail.com',
+    'name' => 'Palash',
+    'display_name' => 'Palash',
+    'email' => 'palash@gmail.com',
     'role_id' => 2,
   ],
 
