@@ -7,17 +7,25 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use MathieuTu\JsonSyncer\Contracts\JsonExportable;
+use MathieuTu\JsonSyncer\Contracts\JsonImportable;
+use MathieuTu\JsonSyncer\Traits\JsonExporter;
+use MathieuTu\JsonSyncer\Traits\JsonImporter;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class User extends Authenticatable implements HasMedia
+// Just add the JsonExportable and/or JsonImportable interfaces and JsonExporter and/or JsonImporter traits to your models.
+
+class User extends Authenticatable implements HasMedia, JsonExportable, JsonImportable
 {
   use Notifiable;
   use HasMediaTrait;
   use HasSlug;
   use SoftDeletes;
+  use JsonExporter;
+  use JsonImporter;
   protected $dates = ['deleted_at'];
 
   /**

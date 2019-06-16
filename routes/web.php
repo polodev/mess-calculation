@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 Auth::routes();
 
+
+Route::get('/export/{table_name?}', 'ExportImportController@export')->name('export');
+
 Route::get('/about', function() {
   return view('about');
 })->name('about');
