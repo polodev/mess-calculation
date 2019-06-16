@@ -23,7 +23,8 @@ class ExportImportController extends Controller
       'role' => Role::class,
     ];
     if ( array_key_exists($table_name, $tables) ) {
-      return $tables[$table_name]::get()->toArray();
+      $results =  $tables[$table_name]::get()->toArray();
+      return response()->json($results);
     } else {
       return "Table not found";
     }
