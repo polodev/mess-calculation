@@ -32,10 +32,10 @@
   <li>Date</li>
   <li>Amount of money you have given</li>
   <li>To whom you gave money</li>
-</ul> 
+</ul>
 
 <p>
-  Man who receive money from you, it will reflect his account as debit value. 
+  Man who receive money from you, it will reflect his account as debit value.
 </p>
 
 <h3>Home page </h3>
@@ -48,9 +48,30 @@
   Their server sleep if our application not browsing by user within 30 minutes.
   I mean very first time loading our web application will take more time.
   Since it will start their server first then loading our application.
-  If app is not using for 30 minutes, it will sleep again. It won't be a problem for use. It just extra one minutes first time load. 
+  If app is not using for 30 minutes, it will sleep again. It won't be a problem for use. It just extra one minutes first time load.
 </p>
 
+<h5>Export</h5>
+
+<?php
+
+$tables = [
+  'user',
+  'bazar',
+  'debitcredit',
+  'meal',
+  'usermonth',
+  'role',
+];
+
+?>
+<ul class="list-group my-5">
+  @foreach ($tables as $table)
+    <li class="list-group-item">
+      <a href="{{ route('export', $table) }}">{{$table}}</a>
+    </li>
+  @endforeach
+</ul>
 
 
 
